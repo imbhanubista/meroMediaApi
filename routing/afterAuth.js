@@ -1,5 +1,5 @@
 const { createMedia } = require("../controllers/mediaController/createMedia.controller");
-const { editMedia } = require("../controllers/mediaController/media.controller");
+const { editMedia, listMedia } = require("../controllers/mediaController/media.controller");
 const {
   createThumbnail,
   listThumbnail,
@@ -22,5 +22,8 @@ router.post('/create_media', createMedia)
 
 // update media
 router.post('/update_media', editMedia)
+
+// to list media
+router.get('/list_media', listMedia)
 
 module.exports = router;

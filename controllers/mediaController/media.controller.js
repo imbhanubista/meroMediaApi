@@ -84,3 +84,24 @@ exports.editMedia = async (req, res) => {
     }
   }
 };
+
+//start of list of media
+exports.listMedia = async(req,res)=>{
+    try{
+        let allMedia = await Media.find({})
+        res.json({
+            type:"error",
+            msg:"All list of media",
+            data:{
+                allMedia
+            }
+        })
+    }
+    catch(err){
+        res.json({
+            type:"error",
+            msg: err.message
+        })
+    }
+}
+// end of lisst of media

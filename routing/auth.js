@@ -1,0 +1,10 @@
+const { forgetPass } = require("../controllers/users/forgetPass.controller");
+const { login } = require("../controllers/users/login.controller");
+const { resetPass } = require("../controllers/users/reset.controller");
+const { signup } = require("../controllers/users/signup.controller");
+const router = require("express").Router();
+router.post("/signup", signup);
+router.post("/login", login);
+router.post("/forget", forgetPass);
+router.post("/reset", resetPass);
+module.exports = router;

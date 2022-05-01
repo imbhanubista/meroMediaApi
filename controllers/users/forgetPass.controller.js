@@ -4,7 +4,9 @@ const mail = require("../../helpers/mailHelper/mail.helper");
 // for code generator
 const { customAlphabet, nanoid } = require("nanoid");
 exports.forgetPass = async (req, res) => {
+  console.log("Hello i am here")
   let { email } = req.body;
+  console.log(email)
   let code = customAlphabet("0123456789", 4)();
   let isAUser = await Users.findOne({ email });
   if (isAUser !== null) {
@@ -29,4 +31,14 @@ exports.forgetPass = async (req, res) => {
       });
     }
   }
+  else{
+    res.json({
+      type:"error",
+      msg:"Email doesn't exists"
+    })
+  }
+
+
+
+
 };

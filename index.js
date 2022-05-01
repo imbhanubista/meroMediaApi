@@ -7,15 +7,11 @@ const port = process.env.PORT || 3000;
 // cors handle
 const cors = require('cors')
 app.use(cors())
-//using express json for input taking
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 // database
 const { connection } = require("./helpers/database/connection");
 connection();
-// fileupload
-const fileUpload = require("express-fileupload");
-app.use(fileUpload());
+
 
 // app.use('/',(req,res)=>{
 //     res.json({
@@ -23,6 +19,31 @@ app.use(fileUpload());
 //         msg:"Welcome home buddy"
 //     })
 // })
+
+ // fileupload
+ const fileUpload = require("express-fileupload");
+
+//using express json for input taking
+app.use(express.urlencoded({ 
+  extended: true, 
+  limit : 500000 * 1024 * 1024 
+}));
+// app.use(express.json())
+app.use(fileUpload({
+  limits: { fileSize: 500000 * 1024 * 1024 },
+  debug : true,
+}));
+app.use(express.json());
+
+app.use(express.static('public'))
+
+
+
+
+
+
+
+
 
 // router
 const router = require("./routing/router");

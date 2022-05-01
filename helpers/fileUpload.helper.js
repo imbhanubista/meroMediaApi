@@ -1,5 +1,5 @@
 const fileUpload = (files,location) => {
-  let file = files.thumbnail;
+  let file = files;
 //   let location = "images/thumbnail"
   file.mv("public" + location,(err)=>{});
 };

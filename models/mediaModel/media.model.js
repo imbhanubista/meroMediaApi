@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Users = require("../users/users.models");
 
 const mediaSchema = mongoose.Schema({
   title: String,
@@ -8,6 +9,7 @@ const mediaSchema = mongoose.Schema({
   price: Number,
   description: String,
   tag: String,
+  created_by:{type:String, ref:Users}
 });
 
 const Media = mongoose.model("Media", mediaSchema);

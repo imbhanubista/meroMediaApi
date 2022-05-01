@@ -1,6 +1,6 @@
 const Media = require("../../models/mediaModel/media.model");
 
-exports.editMedia = async (req, res) => {
+exports.updateMedia = async (req, res) => {
   let { id, title, description, price, tag } = req.body;
 
   let fileTypeError = "";
@@ -90,7 +90,7 @@ exports.listMedia = async(req,res)=>{
     try{
         let allMedia = await Media.find({})
         res.json({
-            type:"error",
+            type:"success",
             msg:"All list of media",
             data:{
                 allMedia
@@ -105,3 +105,44 @@ exports.listMedia = async(req,res)=>{
     }
 }
 // end of lisst of media
+
+// delete media part start
+
+exports.deleteMedia = async(req,res)=>{
+  let {id} = req.params
+  try{
+    await Media.deleteOne({_id:id})
+    res.json({
+      type:"success",
+      msg:"Media has been deleted!"
+    })
+  }
+  catch(err){
+    res.json({
+      type:"error",
+      msg:err.message
+    })
+  }
+}
+// end of delete media part 
+
+// start of edit media part
+exports.editMedia=async(req,res)=>{
+  let{id}=req.params
+  try{
+let editableMedia = await Media.findOne({_id:id})
+res.json({
+  type:"success",
+  msg:"Media to edit :",
+  data:editableMedia
+})
+  }
+  catch(err){
+    res.json({
+      type:"error",
+      msg:err.message
+    })
+  }
+}
+// end of edit media part
+

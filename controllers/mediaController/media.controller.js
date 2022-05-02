@@ -1,11 +1,12 @@
 const Media = require("../../models/mediaModel/media.model");
 
 exports.updateMedia = async (req, res) => {
-  let { id, title, description, price, tag } = req.body;
+  let { id } = body.params;
+  let { title, description, price, tag } = req.body;
 
   let fileTypeError = "";
   let formatError = "";
-  let thumbPath,actualVideoPath,preVideoPath 
+  let thumbPath, actualVideoPath, preVideoPath;
   if (req.files && req.files.thumbnail) {
     //check size and type of thumbnail
     //if all good, upload it
@@ -32,7 +33,7 @@ exports.updateMedia = async (req, res) => {
     ) {
       formatError = "Unsupported preview video format!";
     }
-     preVideoPath = "/preview/" + req.files.previewVideo;
+    preVideoPath = "/preview/" + req.files.previewVideo;
     req.files.previewVideo.mv("public" + preVideoPath, (err) => {});
   } else if (req.files && req.files.actualVideo) {
     if (req.files.actualVideo.size > 30000000) {
@@ -43,7 +44,7 @@ exports.updateMedia = async (req, res) => {
     ) {
       formatError = "Unsupported original video format!";
     }
-     actualVideoPath = "/originalVideo/" + req.files.actualVideo;
+    actualVideoPath = "/originalVideo/" + req.files.actualVideo;
     req.files.actualVideo.mv("public" + actualVideoPath, (err) => {});
   }
   if (fileTypeError !== "") {
@@ -86,63 +87,59 @@ exports.updateMedia = async (req, res) => {
 };
 
 //start of list of media
-exports.listMedia = async(req,res)=>{
-    try{
-        let allMedia = await Media.find({})
-        res.json({
-            type:"success",
-            msg:"All list of media",
-            data:{
-                allMedia
-            }
-        })
-    }
-    catch(err){
-        res.json({
-            type:"error",
-            msg: err.message
-        })
-    }
-}
+exports.listMedia = async (req, res) => {
+  try {
+    let allMedia = await Media.find({});
+    res.json({
+      type: "success",
+      msg: "All list of media",
+      data: {
+        allMedia,
+      },
+    });
+  } catch (err) {
+    res.json({
+      type: "error",
+      msg: err.message,
+    });
+  }
+};
 // end of lisst of media
 
 // delete media part start
 
-exports.deleteMedia = async(req,res)=>{
-  let {id} = req.params
-  try{
-    await Media.deleteOne({_id:id})
+exports.deleteMedia = async (req, res) => {
+  let { id } = req.params;
+  try {
+    await Media.deleteOne({ _id: id });
     res.json({
-      type:"success",
-      msg:"Media has been deleted!"
-    })
-  }
-  catch(err){
+      type: "success",
+      msg: "Media has been deleted!",
+    });
+  } catch (err) {
     res.json({
-      type:"error",
-      msg:err.message
-    })
+      type: "error",
+      msg: err.message,
+    });
   }
-}
-// end of delete media part 
+};
+// end of delete media part
 
 // start of edit media part
-exports.editMedia=async(req,res)=>{
-  let{id}=req.params
-  try{
-let editableMedia = await Media.findOne({_id:id})
-res.json({
-  type:"success",
-  msg:"Media to edit :",
-  data:editableMedia
-})
-  }
-  catch(err){
+exports.editMedia = async (req, res) => {
+  let { id } = req.params;
+  try {
+    let editableMedia = await Media.findOne({ _id: id });
     res.json({
-      type:"error",
-      msg:err.message
-    })
+      type: "success",
+      msg: "Media to edit :",
+      data: editableMedia,
+    });
+  } catch (err) {
+    res.json({
+      type: "error",
+      msg: err.message,
+    });
   }
-}
+};
 // end of edit media part
-

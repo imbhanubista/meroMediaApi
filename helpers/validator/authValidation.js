@@ -29,21 +29,21 @@ const validateReset = joi.object({
 });
 
 const validateThumb = joi.object({
-  title:joi.string().required()
-})
+  title: joi.string().required(),
+});
 
 // media validator
 const validateMediaUpload = joi.object({
   title: joi.string().max(100).required(),
-  price:joi.number().required(),
+  price: joi.number().required(),
   description: joi.string().required(),
-  tag: joi.string().required()
-})
+  tag: joi.string().required(),
+});
 
 module.exports = {
   signupValidation,
   loginValidation,
   validateReset,
-validateThumb,
-validateMediaUpload
+  validateThumb,
+  validateMediaUpload,
 };

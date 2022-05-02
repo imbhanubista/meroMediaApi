@@ -7,6 +7,7 @@ const {
   updateThumbnail,
   editThumbnail,
 } = require("../controllers/mediaController/thumbnail");
+const { listUsers, blockedUser } = require("../controllers/userController/users.controller");
 
 const router = require("express").Router();
 
@@ -28,7 +29,6 @@ router.post('/update_media', updateMedia)
 // to create media
 router.post('/create_media', createMedia)
 
-
 // delete thumbnail route
 router.delete('/delete_thumb/:id', deleteThumbnail)
 
@@ -40,5 +40,11 @@ router.post('/edit_thumb/:id', editThumbnail)
 
 // edit media
 router.post ('/edit_media/:id', editMedia )
+
+// to list users
+router.get('/users', listUsers)
+
+// block and unblock user
+router.post('/status/:id', blockedUser)
 
 module.exports = router;

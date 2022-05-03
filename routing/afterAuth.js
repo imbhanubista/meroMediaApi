@@ -1,5 +1,12 @@
-const { createMedia } = require("../controllers/mediaController/createMedia.controller");
-const {  listMedia, deleteMedia, updateMedia, editMedia } = require("../controllers/mediaController/media.controller");
+const {
+  createMedia,
+} = require("../controllers/mediaController/createMedia.controller");
+const {
+  listMedia,
+  deleteMedia,
+  updateMedia,
+  editMedia,
+} = require("../controllers/mediaController/media.controller");
 const {
   createThumbnail,
   listThumbnail,
@@ -7,7 +14,10 @@ const {
   updateThumbnail,
   editThumbnail,
 } = require("../controllers/mediaController/thumbnail");
-const { listUsers, blockedUser } = require("../controllers/userController/users.controller");
+const {
+  listUsers,
+  blockedUser,
+} = require("../controllers/userController/users.controller");
 
 const router = require("express").Router();
 
@@ -18,33 +28,33 @@ router.post("/createthumbnail", createThumbnail);
 router.get("/list_thumb", listThumbnail);
 
 // to list media
-router.get('/list_media', listMedia)
+router.get("/list_media", listMedia);
 
 // edit thumbnail
 router.post("/update_thumb/:id", updateThumbnail);
 
 // update media
-router.post('/update_media', updateMedia)
+router.post("/update_media", updateMedia);
 
 // to create media
-router.post('/create_media', createMedia)
+router.post("/create_media", createMedia);
 
 // delete thumbnail route
-router.delete('/delete_thumb/:id', deleteThumbnail)
+router.delete("/delete_thumb/:id", deleteThumbnail);
 
 // delete media
-router.delete('/delete_media/:id', deleteMedia)
+router.delete("/delete_media/:id", deleteMedia);
 
 // edit route
-router.post('/edit_thumb/:id', editThumbnail)
+router.post("/edit_thumb/:id", editThumbnail);
 
 // edit media
-router.post ('/edit_media/:id', editMedia )
+router.post("/edit_media/:id", editMedia);
 
 // to list users
-router.get('/users', listUsers)
+router.get("/users", listUsers);
 
 // block and unblock user
-router.post('/status/:id', blockedUser)
+router.post("/status/:id", blockedUser);
 
 module.exports = router;

@@ -21,49 +21,50 @@ exports.listUsers = async (req, res) => {
 // end of list user function
 
 //start function to block and unblock user
-exports.blockedUser=async(req,res)=>{
-  let {id} = req.params
-    let validUser = await Users.findOne({_id:id})
-    if(validUser === null){
+exports.blockedUser = async (req, res) => {
+  let { id } = req.params;
+  let validUser = await Users.findOne({ _id: id });
+  if (validUser === null) {
     res.json({
-      type:"error",
-      msg:"User doesn't exist"
-    })
-    }
-    else{
-    try{
-      
-        if(validUser.isBanned === false){
-         await Users.updateOne({_id:id},{
-           $set:{
-             isBanned: true
-           }
-         })
-         res.json({
-           type:"success",
-           msg:"User has been Blocked!",
-         })
-        }
-        else if(validUser.isBanned === true){
-          await Users.updateOne({_id:id},{
-            $set:{
-              isBanned: false
-            }
-          })
-          res.json({
-            type:"success",
-            msg:"User is Unblocked"
-          })
-        }
-   }
-    
-    catch(err){
+      type: "error",
+      msg: "User doesn't exist",
+    });
+  } else {
+    try {
+      if (validUser.isBanned === false) {
+        await Users.updateOne(
+          { _id: id },
+          {
+            $set: {
+              isBanned: true,
+            },
+          }
+        );
+        res.json({
+          type: "success",
+          msg: "User has been Blocked!",
+        });
+      } else if (validUser.isBanned === true) {
+        await Users.updateOne(
+          { _id: id },
+          {
+            $set: {
+              isBanned: false,
+            },
+          }
+        );
+        res.json({
+          type: "success",
+          msg: "User is Unblocked",
+        });
+      }
+    } catch (err) {
       res.json({
-        type:"error",
-        msg: err.msg
-      })
+        type: "error",
+        msg: err.msg,
+      });
     }
-}}
+  }
+};
 
 //start function to block and unblock user
-

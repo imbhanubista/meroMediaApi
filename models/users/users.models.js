@@ -8,9 +8,8 @@ const userSchema = mongoose.Schema({
   phone: Number,
   password: String,
   photo: String,
-  isAdmin: {type : Boolean,default : false},
-  isBanned: {type : Boolean,default : false},
-
+  isAdmin: { type: Boolean, default: false },
+  isBanned: { type: Boolean, default: false },
 });
 
 // to create module

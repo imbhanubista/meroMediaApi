@@ -11,6 +11,7 @@ const mediaSchema = mongoose.Schema({
   tag: String,
   created_by:{type:String, ref:Users}
 });
+mediaSchema.index({title:'text', description:'text'})
 
 const Media = mongoose.model("Media", mediaSchema);
 

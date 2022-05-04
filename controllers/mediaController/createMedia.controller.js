@@ -82,7 +82,7 @@ exports.createMedia = async (req, res) => {
       } else {
         // path for each file
         let thumbPath = "/images/thumbnail/" + thumb.name;
-        let preVideoPath = "preview/" + preVideo.name;
+        let preVideoPath = "/preview/" + preVideo.name;
         let actualVideoPath = "/originalVideo/" + actualVideo.name;
 
         // to move the file

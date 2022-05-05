@@ -1,3 +1,4 @@
+const { dashboard } = require("../controllers/dashboard/dashboard");
 const {
   createMedia,
 } = require("../controllers/mediaController/createMedia.controller");
@@ -56,5 +57,8 @@ router.get("/users", listUsers);
 
 // block and unblock user
 router.post("/status/:id", blockedUser);
+
+// dashboard
+router.get('/dashboard', dashboard)
 
 module.exports = router;

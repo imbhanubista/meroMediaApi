@@ -146,7 +146,7 @@ exports.editMedia = async (req, res) => {
 
 exports.userMediaList = async (req, res) => {
   try {
-    let allMedia = await Media.find({});
+    let allMedia = await Media.find({},"thumbnail title");
     res.json({
       type: "success",
       msg: "All list of media",
@@ -162,3 +162,23 @@ exports.userMediaList = async (req, res) => {
   }
 };
 // // end of lisst of media
+
+
+// to show details of media before login
+exports.detailMediaForUnauth = async(req,res)=>{
+  try{
+    let detailData = await Media.find({},"-actualVideo")
+    res.json({
+      type:"success",
+      msg:"Detail about media",
+      data: detailData
+    })
+  }
+  catch(err){
+    res.json({
+      type:"error",
+      msg:err.message
+    })
+  }
+}
+// end of detail of media before login

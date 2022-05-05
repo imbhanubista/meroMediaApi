@@ -6,7 +6,7 @@ const {
 const auth = require("./auth");
 const afterAuth = require("./afterAuth");
 const user = require('./user')
-const { listMedia, userMediaList } = require("../controllers/mediaController/media.controller");
+const { listMedia, userMediaList, detailMediaForUnauth } = require("../controllers/mediaController/media.controller");
 // before auth
 router.use("/auth", auth);
 
@@ -15,6 +15,8 @@ router.use("/admin", isLoggedIn, isAdmin, afterAuth);
 
 // for authorized user
 router.use('/user', isLoggedIn, user )
+
+
 
 
 

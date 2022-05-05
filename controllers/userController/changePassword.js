@@ -13,12 +13,12 @@ exports.changePassword = async(req,res)=>{
                 msg:"Old password doesn't matched!!!"
             })
         }
-        // else if(await bcrypt.compare(oldPassword.password , nPassword)){
-        //     res.json({
-        //         type:"error",
-        //         msg:"Old password and new password can't be same."
-        //     })
-        // }
+        else if(await bcrypt.compare(  nPassword, oldPassword.password)){
+            res.json({
+                type:"error",
+                msg:"Old password and new password can't be same."
+            })
+        }
         else if(nPassword !== rPassword){
             res.json({
                 type:"error",

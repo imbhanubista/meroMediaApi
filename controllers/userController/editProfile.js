@@ -9,7 +9,11 @@ exports.editProfile = async(req,res)=>{
         res.json({
             type:"success",
             msg:"Your details",
-            data:userData
+            data: {
+                name: userData.name,
+                bio: userData.bio,
+                profile: userData.profile
+            }
         })
     }
     catch(err){

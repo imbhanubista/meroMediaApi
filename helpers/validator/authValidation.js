@@ -40,10 +40,17 @@ const validateMediaUpload = joi.object({
   tag: joi.string().required(),
 });
 
+
+// edit profile validator
+const validateEditProfile = joi.object({
+  name: joi.string().min(5).max(25).required(),
+
+})
 module.exports = {
   signupValidation,
   loginValidation,
   validateReset,
   validateThumb,
   validateMediaUpload,
+  validateEditProfile
 };

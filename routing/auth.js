@@ -1,3 +1,4 @@
+const { userMediaList } = require("../controllers/mediaController/media.controller");
 const { forgetPass } = require("../controllers/users/forgetPass.controller");
 const { login } = require("../controllers/users/login.controller");
 const { resetPass } = require("../controllers/users/reset.controller");
@@ -7,4 +8,6 @@ router.post("/signup", signup);
 router.post("/login", login);
 router.post("/forget", forgetPass);
 router.post("/reset", resetPass);
+// for unauthorized user 
+router.get('/user/medialist', userMediaList)  
 module.exports = router;

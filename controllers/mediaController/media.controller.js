@@ -144,21 +144,21 @@ exports.editMedia = async (req, res) => {
 };
 // end of edit media part
 
-// exports.userMediaList = async (req, res) => {
-//   try {
-//     let allMedia = await Media.find({});
-//     res.json({
-//       type: "success",
-//       msg: "All list of media",
-//       data: {
-        
-//       },
-//     });
-//   } catch (err) {
-//     res.json({
-//       type: "error",
-//       msg: err.message,
-//     });
-//   }
-// };
+exports.userMediaList = async (req, res) => {
+  try {
+    let allMedia = await Media.find({});
+    res.json({
+      type: "success",
+      msg: "All list of media",
+      data: {
+        allMedia
+      },
+    });
+  } catch (err) {
+    res.json({
+      type: "error",
+      msg: err.message,
+    });
+  }
+};
 // // end of lisst of media

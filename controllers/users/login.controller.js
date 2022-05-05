@@ -29,7 +29,14 @@ exports.login = async (req, res) => {
         type: "error",
         msg: notUser,
       });
-    } else if (!(await bcrypt.compare(password, userDetails.password))) {
+    } 
+    else if(userDetails.isBanned === true){
+      res.json({
+        type:"error",
+        msg:"You are not allowed to login"
+      })
+    }
+    else if (!(await bcrypt.compare(password, userDetails.password))) {
       res.json({
         type: "error",
         msg: NotPass,

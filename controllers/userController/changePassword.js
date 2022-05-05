@@ -1,4 +1,5 @@
  const bcrypt = require('bcrypt')
+const mail = require('../../helpers/mailHelper/mail.helper')
 const Users = require('../../models/users/users.models')
 
 exports.changePassword = async(req,res)=>{
@@ -12,6 +13,12 @@ exports.changePassword = async(req,res)=>{
                 msg:"Old password doesn't matched!!!"
             })
         }
+        // else if(await bcrypt.compare(oldPassword.password , nPassword)){
+        //     res.json({
+        //         type:"error",
+        //         msg:"Old password and new password can't be same."
+        //     })
+        // }
         else if(nPassword !== rPassword){
             res.json({
                 type:"error",
@@ -20,6 +27,7 @@ exports.changePassword = async(req,res)=>{
         }
         else{
             let changedPassword = await bcrypt.hash(nPassword,15)
+            mail(userId.email, "Password Changed Alert!!!", "<h4>Someone has changed your password</h4>")
             await Users.updateOne({_id:userId._id},{
                 $set:{
                     password:changedPassword

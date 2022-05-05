@@ -146,7 +146,7 @@ exports.editMedia = async (req, res) => {
 
 exports.userMediaList = async (req, res) => {
   try {
-    let allMedia = await Media.find({},"thumbnail title");
+    let allMedia = await Media.find({},"thumbnail title price");
     res.json({
       type: "success",
       msg: "All list of media",
@@ -166,8 +166,9 @@ exports.userMediaList = async (req, res) => {
 
 // to show details of media before login
 exports.detailMediaForUnauth = async(req,res)=>{
+  let {id} = req.params
   try{
-    let detailData = await Media.find({},"-actualVideo")
+    let detailData = await Media.find({_id:id},"-actualVideo")
     res.json({
       type:"success",
       msg:"Detail about media",

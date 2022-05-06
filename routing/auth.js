@@ -12,6 +12,6 @@ router.post("/reset", resetPass);
 router.get('/user/medialist', userMediaList)  
 
 // to get detail data 
-router.post('/user/detailData/:id', detailMediaForUnauth)
+router.get('/user/detailData/:id', detailMediaForUnauth)
 
 module.exports = router;

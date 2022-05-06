@@ -8,6 +8,7 @@ const {
   updateMedia,
   editMedia,
 } = require("../controllers/mediaController/media.controller");
+const { purchaseMedia } = require("../controllers/mediaController/purchase.controller");
 const {
   createThumbnail,
   listThumbnail,
@@ -60,5 +61,6 @@ router.post("/status/:id", blockedUser);
 
 // dashboard
 router.get('/dashboard', dashboard)
+
 
 module.exports = router;

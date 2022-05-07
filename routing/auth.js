@@ -1,4 +1,5 @@
 const { userMediaList, detailMediaForUnauth } = require("../controllers/mediaController/media.controller");
+const { detailAfterPurchase } = require("../controllers/mediaController/purchase.controller");
 const { forgetPass } = require("../controllers/users/forgetPass.controller");
 const { login } = require("../controllers/users/login.controller");
 const { resetPass } = require("../controllers/users/reset.controller");
@@ -13,5 +14,6 @@ router.get('/user/medialist', userMediaList)
 
 // to get detail data 
 router.get('/user/detailData/:id', detailMediaForUnauth)
+
 
 module.exports = router;

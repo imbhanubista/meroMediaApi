@@ -1,5 +1,5 @@
 const { editMedia } = require('../controllers/mediaController/media.controller')
-const { purchaseMedia, listPurchase, individualPurchase } = require('../controllers/mediaController/purchase.controller')
+const { purchaseMedia, listPurchase, individualPurchase, detailAfterPurchase } = require('../controllers/mediaController/purchase.controller')
 const { searchMedia } = require('../controllers/mediaController/searchMedia')
 const { changePassword } = require('../controllers/userController/changePassword')
 const { updateProfile, editProfile } = require('../controllers/userController/editProfile')
@@ -25,5 +25,8 @@ router.post('/update_profile', updateProfile)
 
 // edit profile
 router.get('/edit_profile', editProfile)
+
+// detail data after purchased
+router.get('/purchased_detail/:id', detailAfterPurchase)
 
 module.exports = router

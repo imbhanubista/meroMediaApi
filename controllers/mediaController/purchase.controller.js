@@ -53,10 +53,12 @@ else{
 // start of purchase list
 exports.listPurchase = async(req,res)=>{
     try{
-       let data = await Purchase.find({})
+    
+       let data = await Purchase.find({}).populate("product_id").populate("user_id", "name email")
         res.json({
             type:"succes",
-            msg:"Total media purchased"
+            msg:"Total media purchased",
+            data
         })
     }
     catch(err){
@@ -76,7 +78,7 @@ exports.individualPurchase = async(req,res)=>{
         // to find purchased media according to userId
         let mediaPurchased = await Purchase.find({user_id: userId._id}).populate("product_id")
         res.json({
-            type:"error",
+            type:"success",
             msg:"List of media you have purchased",
             data: mediaPurchased
         })
@@ -90,3 +92,37 @@ exports.individualPurchase = async(req,res)=>{
 }
 
 // end of individual purchase item
+
+
+// show actual video after purchase
+exports.detailAfterPurchase = async(req,res)=>{
+    let userId = req.loggedInData
+    let {id} = req.params
+    try{
+  let purchaseData = await Purchase.findOne({$and:[
+     { user_id: userId._id},
+     {_id:id}
+  ]}).populate("product_id","-previewVideo -price -description -tag")
+
+  if(purchaseData === null){
+    res,json({
+      type:"error",
+      msg:"This user haven't buy this product"
+    })
+  }else{
+    res.json({
+        type:"success",
+        msg:"Purchased Media",
+        data: purchaseData
+    })
+  }
+    }
+    catch(err){
+      res.json({
+        type:"error",
+        msg:err.message
+      })
+    }
+  }
+  
+  // end of function that show actual video after purchase

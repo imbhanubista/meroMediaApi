@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
+const Users = require('../users/users.models')
 const Media = require('./media.model')
 
 const purchaseSchema = mongoose.Schema({
-    user_id: String,
+    user_id: {type:String, ref:Users},
     product_id: {type:String , ref:Media}
 })
 

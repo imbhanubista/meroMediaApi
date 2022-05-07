@@ -1,4 +1,6 @@
+const { json } = require("express/lib/response");
 const Media = require("../../models/mediaModel/media.model");
+const Purchase = require("../../models/mediaModel/purchase.model");
 
 exports.updateMedia = async (req, res) => {
   let { id } = body.params;
@@ -183,3 +185,5 @@ exports.detailMediaForUnauth = async(req,res)=>{
   }
 }
 // end of detail of media before login
+
+

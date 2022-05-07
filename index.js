@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const compression = require('compression')
 //using dot env
 require("dotenv").config();
 //port to run the code on
@@ -7,6 +8,9 @@ const port = process.env.PORT || 3000;
 // cors handle
 const cors = require('cors')
 app.use(cors())
+
+// compress all the responses
+app.use(compression())
 
 // database
 const { connection } = require("./helpers/database/connection");

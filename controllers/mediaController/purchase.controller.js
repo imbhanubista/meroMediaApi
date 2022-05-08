@@ -105,7 +105,7 @@ exports.detailAfterPurchase = async(req,res)=>{
   ]}).populate("product_id","-previewVideo -price -description -tag")
 
   if(purchaseData === null){
-    res,json({
+    res.json({
       type:"error",
       msg:"This user haven't buy this product"
     })

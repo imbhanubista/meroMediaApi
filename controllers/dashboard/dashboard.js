@@ -1,4 +1,5 @@
 const Media = require("../../models/mediaModel/media.model")
+const Purchase = require("../../models/mediaModel/purchase.model")
 const Thumbnail = require("../../models/mediaModel/thumbnail.model")
 const Users = require("../../models/users/users.models")
 
@@ -7,13 +8,15 @@ exports.dashboard = async (req,res)=>{
         let totalMedia = await Media.countDocuments({})
         let totalUser = await Users.countDocuments({})
         let totalThumbnail = await Thumbnail.countDocuments({})
+        let totalPurchase = await Purchase.countDocuments({})
         res.json({
             type:"success",
             msg:"Dashboard",
             data:{
                 totalMedia,
                 totalUser,
-                totalThumbnail
+                totalThumbnail,
+                totalPurchase
             }
         })
     }

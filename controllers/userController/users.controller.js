@@ -42,7 +42,7 @@ exports.blockedUser = async (req, res) => {
         );
         res.json({
           type: "success",
-          msg: "User has been Blocked!",
+          msg:`${validUser.name} is blocked!`,
         });
       } else if (validUser.isBanned === true) {
         await Users.updateOne(
@@ -55,7 +55,7 @@ exports.blockedUser = async (req, res) => {
         );
         res.json({
           type: "success",
-          msg: "User is Unblocked",
+          msg: `${validUser.name} is unblocked!`,
         });
       }
     } catch (err) {

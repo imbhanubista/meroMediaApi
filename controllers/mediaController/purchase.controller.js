@@ -1,12 +1,14 @@
 const Media = require("../../models/mediaModel/media.model")
 const Purchase = require("../../models/mediaModel/purchase.model")
+const stripe = require('stripe')(process.env.STRIPE_SECRET)
 
 
 // start of purchase media 
 exports.purchaseMedia = async(req,res)=>{
     let {id} = req.params
     let users = req.loggedInData
-    console.log(users)
+    let token = req.body.token
+    // console.log(token,"I am here")
     try{
 let mediaId = await Media.findOne({_id:id})
 let userId = await Purchase.findOne({
@@ -29,14 +31,32 @@ else if(userId !==null){
 }
 
 else{
-    await new Purchase({
-        user_id: users._id,
-        product_id: mediaId._id
-    }).save()
-    res.json({
-        type:"success",
-        msg:"Successfully Purchased items!!!"
-    })
+    try{
+        let paymentGateway = await stripe.charges.create({
+            amount: mediaId.price * 100,
+            currency: "usd",
+            source: token,
+            description: "Purchase of media " + mediaId.title 
+        })
+        // console.log(paymentGateway);
+        await new Purchase({
+            user_id: users._id,
+            product_id: mediaId._id,
+            payment_info: paymentGateway.id
+
+        }).save()
+        res.json({
+            type:"success",
+            msg:"Successfully Purchased items!!!"
+        })
+    }
+    catch(err){
+        res.json({
+            type:"error",
+            msg:"Payment failed!"+ err.message
+        })
+    }
+   
 }
     }
     
